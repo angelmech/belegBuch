@@ -25,14 +25,38 @@ class Sentiments(sentiFile: String) {
     *
     * Aufgabe 4
     *
+   * Gruppenarbeit: Angel Mechkarov, Kerem Gürbüz
     * ********************************************************************************************
     */
 
-  def getDocumentGroupedByCounts(filename: String, wordCount: Int): List[(Int, List[String])] = ???
+  def getDocumentGroupedByCounts(filename: String, wordCount: Int): List[(Int, List[String])] =
+    val url = getClass.getResource("/" + filename).getPath // einlesen
+    val lines = scala.io.Source.fromFile(url).getLines().toList // konvertiert alle Zeilen in eine Liste
 
-  def getDocumentSplitByPredicate(filename: String, predicate:String=>Boolean): List[(Int, List[String])] = ???
+    val words = lines.flatMap(_.split("\\W+")).filter(_.nonEmpty).map(_.toLowerCase) // Wörter extrahieren: Splittet jede Zeile an Nicht-Wort-Zeichen, Entfernt leere Strings
 
-  def analyseSentiments(l: List[(Int, List[String])]): List[(Int, Double, Double)] = ???
+    words.grouped(wordCount).zipWithIndex.map(x => (x._2 + 1, x._1)).toList
+
+
+
+  def getDocumentSplitByPredicate(filename: String, predicate:String=>Boolean): List[(Int, List[String])] =
+    val url = getClass.getResource("/" + filename).getPath
+    val lines = scala.io.Source.fromFile(url).getLines().toList
+
+    val sections = lines
+      .dropWhile(!predicate(_))
+      .foldLeft(List.empty[List[String]])((acc, line) =>
+        if predicate(line) then acc :+ List.empty
+        else acc.init :+ (acc.lastOption.getOrElse(List()) ++ line.split("\\W+").filter(_.nonEmpty).map(_.toLowerCase)))
+
+    sections.zipWithIndex.map(x => (x._2 + 1, x._1))
+
+
+  def analyseSentiments(l: List[(Int, List[String])]): List[(Int, Double, Double)] =
+    l.map(x => (x._1,
+        if x._2.flatMap(sentiments.get).nonEmpty then x._2.flatMap(sentiments.get).sum.toDouble / x._2.flatMap(sentiments.get).size else 0.0,
+        if x._2.nonEmpty then x._2.flatMap(sentiments.get).size.toDouble / x._2.size else 0.0))
+
 
   /** ********************************************************************************************
     *
