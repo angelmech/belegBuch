@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <option name="separateProdTestSources" value="true" />
+    <profile name="sbt 1" modules="BelegBuchScala3Aufgabe,BelegBuchScala3Aufgabe.main,BelegBuchScala3Aufgabe.test,belegbuchscala3aufgabe_7561,belegbuchscala3aufgabe_7561.main,belegbuchscala3aufgabe_7561.test" />
+  </component>
+</project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.iml" filepath="$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.BelegBuchScala3Aufgabe-build.iml" filepath="$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.BelegBuchScala3Aufgabe-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.main.iml" filepath="$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.test.iml" filepath="$PROJECT_DIR$/.idea/modules/BelegBuchScala3Aufgabe/BelegBuchScala3Aufgabe.test.iml" />
+    </modules>
+  </component>
+</project>
