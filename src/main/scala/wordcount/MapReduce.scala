@@ -18,7 +18,7 @@ object MapReduce :
   /*
     Write a function that determines how many jobs each user sumbmitted
     Result: Map (key:user, value: number)
-   */
+  */
   def numberOfJobsPerUser(l:List[(String,String,String,Int)]):Map[String,Int]=
     mapReduceKV[(String,String,String,Int), (String,Int), Map[String,Int]](
       x => List((x._2, 1)),
@@ -30,7 +30,7 @@ object MapReduce :
   /*
   Write a function that determines how many times a job name was used from each user
   Result: Map (key:(user,Job), value: number)
- */
+  */
   def numberOfJobsPerUserUsingACertainName(l:List[(String,String,String,Int)]):Map[(String,String),Int]=
     mapReduceKV[(String,String,String,Int), ((String,String), Int), Map[(String, String), Int]](
       x => List(((x._2, x._3), 1)),
@@ -42,7 +42,7 @@ object MapReduce :
   /*
     Write a function that determines all job names (without duplicates)
     Result: List(jobnames)
-*/
+  */
   def distinctNamesOfJobs(l: List[(String, String, String, Int)]): List[String] =
     mapReduceKV[(String,String,String,Int), String, List[String]](
       x => List(x._3),
