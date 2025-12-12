@@ -55,7 +55,13 @@ object MapReduce :
     Write a function that determines how many jobs lasted more than 20sec
     Result: Map (key:("more" or "less"), value: number)
   */
-  def moreThanXSeconds(l:List[(String,String,String,Int)]):Map[String,Int]= ???
+  def moreThanXSeconds(l:List[(String,String,String,Int)]):Map[String,Int]=
+    mapReduceKV[(String,String,String,Int), (String,Int), Map[String, Int]](
+      x => List((if (x._4 > 20) "more" else "less", 1)),
+      (m,x) => m.updated(x._1, x._2 + m.getOrElse(x._1, 0)),
+      Map[String,Int](),
+      l
+    )
 
   /*
     Write a function that determines the number of were submitted per day
