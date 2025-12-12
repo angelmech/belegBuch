@@ -67,5 +67,12 @@ object MapReduce :
     Write a function that determines the number of were submitted per day
     Result: Map (key:day- format "YYYY-MM-dd" , value: number)
   */
-  def numberOfJobsPerDay(l:List[(String,String,String,Int)]):Map[String,Int]= ???
+  def numberOfJobsPerDay(l:List[(String,String,String,Int)]):Map[String,Int]=
+    val outputFormat = new SimpleDateFormat("yyyy-MM-dd")
+    mapReduceKV[(String,String,String,Int), (String, Int), Map[String,Int]](
+      x => List((outputFormat.format(sdf.parse(x._1)), 1)),
+      (m,x) => m.updated(x._1, x._2 + m.getOrElse(x._1, 0)),
+      Map[String,Int](),
+      l
+    )
 
