@@ -43,7 +43,13 @@ object MapReduce :
     Write a function that determines all job names (without duplicates)
     Result: List(jobnames)
 */
-  def distinctNamesOfJobs(l:List[(String,String,String,Int)]):List[String]= ???
+  def distinctNamesOfJobs(l: List[(String, String, String, Int)]): List[String] =
+    mapReduceKV[(String,String,String,Int), String, List[String]](
+      x => List(x._3),
+      (li, x) => if (li.contains(x)) li else x :: li,
+      List[String](),
+      l
+    )
 
   /*
     Write a function that determines how many jobs lasted more than 20sec
