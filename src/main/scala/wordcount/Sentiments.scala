@@ -1,7 +1,6 @@
 package wordcount
 
 import java.awt.{Color, GridLayout}
-
 import org.jfree.chart.{ChartPanel, JFreeChart}
 import org.jfree.chart.axis.NumberAxis
 import org.jfree.chart.plot.XYPlot
@@ -9,6 +8,8 @@ import org.jfree.chart.renderer.xy.XYDotRenderer
 import org.jfree.data.xy.{XYSeries, XYSeriesCollection}
 import org.jfree.ui.ApplicationFrame
 import org.jfree.util.ShapeUtilities
+
+import scala.io.Source.fromFile
 
 
 /**
@@ -31,7 +32,7 @@ class Sentiments(sentiFile: String) {
 
   def getDocumentGroupedByCounts(filename: String, wordCount: Int): List[(Int, List[String])] =
     val url = getClass.getResource("/" + filename).getPath // einlesen
-    val lines = scala.io.Source.fromFile(url).getLines().toList // konvertiert alle Zeilen in eine Liste
+    val lines = fromFile(url).getLines().toList // konvertiert alle Zeilen in eine Liste
 
     val words = lines.flatMap(_.split("\\W+")).filter(_.nonEmpty).map(_.toLowerCase) // Wörter extrahieren: Splittet jede Zeile an Nicht-Wort-Zeichen, Entfernt leere Strings
 
@@ -41,7 +42,7 @@ class Sentiments(sentiFile: String) {
 
   def getDocumentSplitByPredicate(filename: String, predicate:String=>Boolean): List[(Int, List[String])] =
     val url = getClass.getResource("/" + filename).getPath
-    val lines = scala.io.Source.fromFile(url).getLines().toList
+    val lines = fromFile(url).getLines().toList
 
     val sections = lines
       .dropWhile(!predicate(_))
@@ -67,7 +68,7 @@ class Sentiments(sentiFile: String) {
 
   def getSentiments(filename: String): Map[String, Int] = {
     val url = getClass.getResource("/" + filename).getPath
-    val src = scala.io.Source.fromFile(url)
+    val src = fromFile(url)
     val iter = src.getLines()
     val result: Map[String, Int] = (for (row <- iter) yield {
       val seg = row.split("\t"); (seg(0) -> seg(1).toInt)
